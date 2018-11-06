@@ -17,7 +17,7 @@ npm i webpack-dev-server
 10 npm i babel-preset-react@6.24.1 --dev
 在webpack.config.js  module-rules-use-option 加入react(或者新建一个.babelrc)  
 11 npm install --save react@16.2.0 react-dom@16.2.0
-
+12 npmi i --save-dev react-router-dom@4.2.2
 
 
 
