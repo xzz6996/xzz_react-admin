@@ -27,6 +27,19 @@ window.onpopstate=function(){
 //     Redirect 自动跳转
 
 
+
+// exact是Router的一个属性，一般而言,react路由会匹配所有匹配到的路由组件,exact能够使得路由匹配的更严格一些.
+//exact的值为bool型，为true是表示严格匹配，为false时为正常匹配。
+//exact 为true,   '/'与'/xxx'是不匹配的 ,为false, '/'与'/xxx'是匹配的
+
+//{this.props.children} 表示组件的所有子节点 可以通过React.Children.map/forEach等API来操作
+
+
+// this.props.match 包含了具体的 url 信息，在 params 字段中可以获取到各个路由参数的值。
+
+//<Redirect to="" /> Redirect组件的必须属性是to属性，表示重定向的新地址。
+
+
 class A extends React.Component{
     constructor(props){
         super(props)

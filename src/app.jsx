@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import {BrowserRouter as Router,Route,Link,Switch} from 'react-router-dom'
+import {BrowserRouter as Router,Route,Link,Switch,Redirect} from 'react-router-dom'
 
-import 'font-awesome/css/font-awesome.min.css'   //字体图标
-import './index.scss'
 
+import Home from 'page/home/index.jsx'
+import Layout from 'component/Layout/index.jsx'
+import product from 'page/product/index.jsx'
 
 ReactDOM.render(
-    <div>6666</div>,
+    <Router>
+        <Layout>
+            <Switch>
+                <Route exact path="/" component={Home} /> 
+                <Route exact path="/product" component={product} /> 
+
+            </Switch> 
+        </Layout>              
+    </Router>,
     document.getElementById('app')
 )
 

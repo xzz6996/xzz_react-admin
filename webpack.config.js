@@ -9,6 +9,12 @@ module.exports={
         publicPath:"/dist/",
         filename:'js/app.js'
     },
+    resolve:{
+        alias:{  //创建 import 或 require 的别名(设置绝对路径)来确保模块引入变得更简单
+          page:path.resolve(__dirname,'src/page'),
+          component:path.resolve(__dirname,'src/component')
+        }
+    },
     module:{
         rules:[
             //react语法的处理
@@ -68,7 +74,10 @@ module.exports={
         ]
     },
     devServer: {
-        port:8086
+        port:8086,
+        historyApiFallback:{ //当使用HTML5HistoryAPI时 任意的404响应都可能需要被替代为index.html
+          index:'/dist/index.html'
+        }
     },
     plugins:[
       //处理html文件
