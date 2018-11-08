@@ -1,19 +1,24 @@
-import React from 'react'
-import TopNav from 'component/top-nav/index.jsx'
-import SideNav from 'component/side-nav/index.jsx'
-import './index.scss'
-import './base.css'
+
+import React from 'react';
+
+import NavTop from 'component/nav-top/index.jsx';
+import NavSide from 'component/nav-side/index.jsx';
+
+import './theme.css';
+import './index.scss';
 
 class Layout extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
     }
     render(){
-        return (<div id="wrapper">    
-                <TopNav/>
-                <SideNav/>           
-            {this.props.children}
-        </div>)
+        return (
+            <div id="wrapper">
+                <NavTop />
+                <NavSide />
+                {this.props.children}
+            </div>
+        );
     }
 }
 
