@@ -7,7 +7,7 @@ class Mutil{
                 type:params.type||"get",
                 data:params.data||null,
                 dataType: params.dataType|| 'json',
-                success(res){
+                success:res=>{
                     if(res.status===0){
                         resolve(res.data,res.msg)
                     }
@@ -17,7 +17,7 @@ class Mutil{
                         reject(res.data||res.msg);
                     }
                 },
-                error(err){
+                error:err=>{
                     reject(err)
                 }
             })
@@ -39,13 +39,13 @@ class Mutil{
         alert(errorMsg)
     }
     //存储数据
-    setStorage(data){
+    setStorage(name,data){
         let dataType=typeof data;
         if('object'===dataType){
-            window.localStorage.set(name,JSON.stringify(data));
+            window.localStorage.setItem(name,JSON.stringify(data));
         }
         else if(['number','string','boolean'].indexOf(dataType)>=0){
-            window.localStorage.set(name,data);
+            window.localStorage.setItem(name,data);
         }
         else{
             alert("该类型不支持存储")

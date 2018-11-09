@@ -27,7 +27,7 @@ class Login extends React.Component{
         }
         let checkLoginResult=_user.checkLogin(loginInfo);
         if(checkLoginResult.status){
-            _user.login(loginInfo).then(res=>{    
+            _user.login(loginInfo).then(res=>{   
                 _util.setStorage('userInfo',res)                              
                 this.props.history.push(this.state.redirect)
             }).catch(err=>{

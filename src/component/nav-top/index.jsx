@@ -1,8 +1,6 @@
-
 import React        from 'react';
 import { Link }     from 'react-router-dom';
-import { runInThisContext } from 'vm';
-import Mutil from 'util/index.jsx';
+import Mutil from 'util/util.jsx';
 import User from 'server/user-server.jsx';
 const _user=new User();
 const _util=new Mutil();
@@ -16,9 +14,9 @@ class NavTop extends React.Component{
     }
     // 退出登录
     onLogout(){
-         _user.onLogout().then(res=>{
-             _util.remmoveStorage(userInfo);
-             window.location.href="/";
+         _user.loginOut().then(res=>{
+             _util.removeStorage('userInfo');
+             window.location.href="/login";
          }).catch(err=>{
             _util.errorTips(err);
          })  
@@ -27,7 +25,7 @@ class NavTop extends React.Component{
         return (
             <div className="navbar navbar-default top-navbar">
                 <div className="navbar-header">
-                    <Link className="navbar-brand" to="/"><b>HAPPY</b>MMALL</Link>
+                    <Link className="navbar-brand" to="/"><b>NAIVE</b>  Cshop</Link>
                 </div>
 
                 <ul className="nav navbar-top-links navbar-right">

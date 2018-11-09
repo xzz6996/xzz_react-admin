@@ -35,6 +35,14 @@ class User{
             type:"post",
         })
     }
+    //用户列表
+    UserList(pageNum){
+        return _util.request({
+            url:"/manage/user/list.do",
+            type:"post",
+            data:{pageNum:pageNum}
+        })
+    }
 
 }
 
