@@ -4,10 +4,13 @@ import {BrowserRouter as Router,Route,Link,Switch,Redirect} from 'react-router-d
 
 import Home from 'page/home/index.jsx'
 import Layout from 'component/Layout/index.jsx'
-import product from 'page/product/index.jsx'
+import Product from 'page/product/index.jsx'
 import ErrorPage from 'page/error/index.jsx'
 import Login from 'page/login/index.jsx'
 import UserList from 'page/user/index.jsx'
+
+
+
 
 class App extends React.Component{
     render(){
@@ -15,7 +18,8 @@ class App extends React.Component{
             <Layout>
                 <Switch>
                     <Route exact path="/" component={Home} /> 
-                    <Route  path="/product" component={product} /> 
+                    <Route  path="/product/index" component={Product} /> 
+                    <Redirect exact from="/product" to="/product/index" />
                     <Route  path="/user/index" component={UserList} /> 
                     <Redirect exact from="/user" to="/user/index"/>   
                     <Route  component={ErrorPage} />       

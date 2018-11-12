@@ -119,7 +119,7 @@ class ProductList extends React.Component{
                                     </td>
                                     <td>￥{product.price}</td>
                                     <td>
-                                        <p>{product.status == 1 ? '在售' : '已下架'}</p>
+                                        <p>{product.weishengj == 1 ? '在售' : '已下架'}</p>
                                         <button className="btn btn-xs btn-warning" 
                                             onClick={(e) => {this.onSetProductStatus(e, product.id, product.status)}}>{product.status == 1 ? '下架' : '上架'}</button>
                                     </td>

@@ -34,6 +34,10 @@ class Mutil{
         var r=window.location.search.substr(1).match(reg);
         if(r!=null){return unescape(r[2])}else{return null};
     }
+     //成功提示提示
+    successTips(successMsg){
+        alert(successMsg||"成功了")
+    }
     //错误提示
     errorTips(errorMsg){
         alert(errorMsg)

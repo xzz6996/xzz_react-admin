@@ -15,10 +15,19 @@ class TableList extends React.Component{
     }
     render(){
         let tableTitle=this.props.names.map((name,index)=>{
-            return (<th key={index}>{name}</th>)
+            if(typeof name ==="object"){
+                return (<th key={index} width={name.width}>{name.name}</th>)
+            }else if(typeof name ==="string"){
+                return (<th key={index}>{name}</th>)
+            }
+            
         })
         let listBody= this.props.children;
-        let listError=this.state.isFirstLoading?<tr className="text"><td>正在加载中~~~~</td></tr>:<tr className="text"><td>找不到哦~~~</td></tr>;    
+        let listError=(<tr>
+                <td colSpan={this.props.names.length} className="text">
+                    {this.state.isFirstLoading?"正在加载中~~~~":"找不到哦~~~"}
+                </td> 
+        </tr>);  
         let tableBody=listBody.length>0?listBody:listError;
         return (<table className="table table-bordered">
                 <thead>
