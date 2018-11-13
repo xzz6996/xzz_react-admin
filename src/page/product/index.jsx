@@ -17,8 +17,7 @@ class Product extends React.Component{
         super(props);
         this.state={
             pageNum:1,
-            list:[],
-            type:"search"||""
+            list:[]
         }
     }
     componentDidMount(){
@@ -42,7 +41,7 @@ class Product extends React.Component{
     }
     //上架 下架
     changeStatus(e,id,status){
-        let newStatus=status==1?2:1;
+      let newStatus=status==1?2:1;
       let params={productId:id,status:newStatus};
       _productList.setSaleStatus(params).then(res=>{
         _util.successTips(res.data);
@@ -53,7 +52,21 @@ class Product extends React.Component{
     }
 
     search(searchType,searchkeyWord){
-        console.log(searchType,searchkeyWord)
+        let info={pageNum:this.state.pageNum};
+        if(searchType==="productId"){
+            info.productId=searchkeyWord;
+        }
+        if(searchType==="productName"){
+            info.productName=searchkeyWord;
+        }
+        if(searchkeyWord===""){
+            this.loadData();
+        }
+        _productList.productSearch(info).then(res=>{
+            this.setState(res)
+        }).catch(err=>{
+            _util.errorTips(err)
+        })
     }
     render(){
         let tableTitle=[{name: '商品ID', width: '10%'},
@@ -79,6 +92,12 @@ class Product extends React.Component{
                     </tr>) });
         return (<div id="page-wrapper">
         <PageTitle title="产品列表"/>
+        <div className="postion-right">
+            <Link to="/product/save" className="btn btn-info">
+               <i className="glyphicon glyphicon-plus"></i>
+               <span>添加商品</span> 
+            </Link>
+        </div>
         <SearchProduct comeOut={(searchType,searchkeyWord)=>{this.search(searchType,searchkeyWord)}}/>
         <TableList names={tableTitle}>
             {listBody}
