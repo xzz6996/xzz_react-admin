@@ -1,0 +1,25 @@
+.img-con{
+    float: left;
+    position: relative;
+    border: 1px solid #ccc;
+    .img{
+        width: 100px;
+        height: 120px;
+    }
+    .fa{
+        display: none;
+    }
+    .fa:hover{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+    }
+}
+

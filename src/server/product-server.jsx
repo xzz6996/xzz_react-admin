@@ -27,7 +27,7 @@ class Product{
         })
     }
     //获取品类子节点(平级)
-    getFirst(categoryId){
+    getCotagory(categoryId){
         return _util.request({
             url:"/manage/category/get_category.do",
             type:"post",
