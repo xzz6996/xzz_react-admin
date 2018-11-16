@@ -9,7 +9,7 @@ import UserList from 'page/user/index.jsx'          // 用户列表
 //商品
 import Product from 'page/product/index.jsx'
 import SaveProduct from 'page/product/save.jsx'
-
+import DetailProduct from 'page/product/detail.jsx'
 
 class App extends React.Component{
     render(){
@@ -18,7 +18,8 @@ class App extends React.Component{
                 <Switch>
                     <Route exact path="/" component={Home} /> 
                     <Route  path="/product/index" component={Product} /> 
-                    <Route path="/product/save" component={SaveProduct} />
+                    <Route path="/product/save/:pid?" component={SaveProduct} /> 
+                    <Route path="/product/detail/:pid" component={DetailProduct}/>
                     <Redirect exact from="/product" to="/product/index" />
                     <Route  path="/user/index" component={UserList} /> 
                     <Redirect exact from="/user" to="/user/index"/>   

@@ -17,9 +17,25 @@ class CategorySelect extends React.Component{
     componentDidMount(){
         this.loadFirst();
     }
+    componentWillReceiveProps(nextProps){
+        let parentCategoryId=nextProps.parentCategoryId,
+        categoryId=nextProps.categoryId;
+        if(parentCategoryId===0){
+            this.setState({
+                first:categoryId,
+                second:0
+            })
+        }else{
+            this.loadSecond();
+            this.setState({
+                first:parentCategoryId,
+                second:categoryId
+            })
+        }
+    }
     //加载一级分类
     loadFirst(){
-        _product.getCotagory().then(res=>{           
+        _product.getCotagory().then(res=>{        
             this.setState({
                 list1:res
             })
@@ -54,18 +70,18 @@ class CategorySelect extends React.Component{
     render(){
         return(
             <div>
-                <select className="form-control selectOne" name="first" value={this.state.first} onChange={(e)=>this.onChange(e)}>
+                <select className="form-control selectOne" name="first" value={this.state.first} onChange={(e)=>this.onChange(e)} readOnly={this.props.readOnly}>
                     <option value="0">请选择一级分类</option>
                     {
                         this.state.list1.map((name,index)=>
                             <option key={index} value={name.id}>{name.name}</option>
                         )                       
-                    }
+                    }                  
                 </select>
                 <br></br>
                 {
                     this.state.first>0? 
-                    <select className="form-control selectTwo" name="second" value={this.state.second} onChange={(e)=>this.onChange(e)}>
+                   <select className="form-control selectTwo" name="second" value={this.state.second} onChange={(e)=>this.onChange(e)} readOnly={this.props.readOnly}>
                         <option value="0">请选择二级分类</option>
                         {
                             this.state.list2.map((name,index)=>

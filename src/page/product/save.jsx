@@ -5,6 +5,9 @@ import FileUploader from 'util/file-uploader/index.jsx'
 import util from 'util/util.jsx'
 const _util =new util();
 import './save.scss'
+import RichEditor from 'util/rich-editor/index.jsx'
+import ProduceServer from 'server/product-server.jsx'
+const _server=new ProduceServer();
 
 class SaveProduct extends React.Component{
     constructor(props){
@@ -14,12 +17,32 @@ class SaveProduct extends React.Component{
             name                : '', //名称
             subtitle            : '', //描述
             categoryId          : 0,  //first or second
+            parentCategoryId    : 0,
             subImages           : [], //图片  
             price               : '', //价钱
             stock               : '', //库存  
             detail              : '', //详情  
-            status              : 1   //商品状态1为在售
+            status              : 1  , //商品状态1为在售
         }
+    }
+    componentDidMount(){
+        if(this.props.match.params.pid){
+            this.edit(); 
+        }     
+    }
+    //编辑
+    edit(){
+      _server.getProduct(this.state.id).then(res=>{
+          let subImages=res.subImages.split(',');
+          res.subImages=subImages.map((imgUrl)=>{
+            return {
+                uri:imgUrl,
+                url:res.imageHost+imgUrl
+            }
+          })
+          res.defaultDetail=res.detail;
+          this.setState(res);     
+      })
     }
     //所属分类
     comOut(first,second){
@@ -57,7 +80,41 @@ class SaveProduct extends React.Component{
     }
     //删除图片
     delectImg(e){
-        let index=e.target.getAttribule('index');
+        let index= parseInt(e.target.getAttribute('index')),
+            subImages= this.state.subImages;
+            subImages=subImages.splice(index, 1);
+        this.setState({
+            subImages:subImages
+        })
+    }
+    //富文本编辑器改变值
+    richeditorValueChange(value){
+        this.setState({
+            detail:value
+        })
+    }
+    //添加商品
+    save(){
+        let subImages=this.state.subImages.map((url,index)=>{return url});
+        let info={
+            name                : this.state.name, //名称
+            subtitle            : this.state.subtitle, //描述
+            categoryId          : parseInt(this.state.categoryId),  //first or second
+            subImages           : subImages, //图片  
+            price               : parseFloat(this.state.price), //价钱
+            stock               : parseInt(this.state.stock), //库存  
+            detail              : this.state.detail, //详情  
+            status              : this.state.status , //商品状态1为在售
+        }
+        var data=_server.checkProduct(info);
+        if(!data.status){
+            _util.errorTips(data.msg)
+        }else{
+            _server.save(info).then(res=>{
+                _util.successTips("添加商品成功");
+            this.props.history.push('/product/index')
+            })
+        }       
     }
     render(){
         return(
@@ -65,27 +122,27 @@ class SaveProduct extends React.Component{
                 <PageTitle title="添加商品" />             
                     <div className="form-group  change-group">
                         <label>商品名称</label>
-                        <input type="text" className="form-control" placeholder="请输入商品名称" name="name" onChange={(e)=>this.valueChange(e)}/>
+                        <input type="text" className="form-control" placeholder="请输入商品名称" name="name" value={this.state.name} onChange={(e)=>this.valueChange(e)}/>
                     </div>
                     <div className="form-group  change-group ">
                         <label>商品描述</label>
-                        <input type="text" className="form-control" placeholder="请输入商品名称" name="subtitle" onChange={(e)=>this.valueChange(e)}/>
+                        <input type="text" className="form-control" placeholder="请输入商品名称" name="subtitle"  value={this.state.subtitle} onChange={(e)=>this.valueChange(e)}/>
                     </div>
                     <div className="form-group  change-group ">
                         <label>所属分类</label>
-                        <CategorySelect comeIn={(first,second)=>this.comOut(first,second)}/>
+                        <CategorySelect parentCategoryId={this.state.parentCategoryId} categoryId={this.state.categoryId}  comeIn={(first,second)=>this.comOut(first,second)}/>
                     </div>
                     <div className="form-group  change-group">
                         <label>商品价格</label>
-                        <input type="text" className="form-control" placeholder="请输入商品价格" name="price" onChange={(e)=>this.valueChange(e)}/>
+                        <input type="text" className="form-control" placeholder="请输入商品价格" name="price" value={this.state.price} onChange={(e)=>this.valueChange(e)}/>
                     </div>
                     <div className="form-group  change-group">
                         <label>商品库存</label>
-                        <input type="text" className="form-control" placeholder="请输入商品库存" name="stock" onChange={(e)=>this.valueChange(e)}/>
+                        <input type="text" className="form-control" placeholder="请输入商品库存" name="stock" value={this.state.stock} onChange={(e)=>this.valueChange(e)}/>
                     </div>
                     <div className="form-group  change-group">
-                        <label className="col-md-2">商品图片</label>
-                        <div className="col-md-10">
+                        <label >商品图片</label>
+                        <div className="col-md-12">
                         {
                             this.state.subImages.length>0?this.state.subImages.map((image, index)=>(
                                 <div key={index} className="img-con">
@@ -95,16 +152,16 @@ class SaveProduct extends React.Component{
                             )):<div>请上传图片</div>
                         }
                         </div>    
-                        <div className="col-md-offset-2 col-md-10">
+                        <div className="col-md-12">
                             <FileUploader onSuccess={(res)=>this.uploadSuccess(res)} onError={(err)=>this.uploadError(err)} />
                         </div>                                                                     
                     </div>
                     <div className="form-group  change-group">
                         <label>商品详情</label>
-                        <input type="text" className="form-control" placeholder="请输入商品详情" />
+                        <RichEditor    detail={this.state.detail} defaultDetail={this.state.defaultDetail} onValueChange={(value)=>this.richeditorValueChange(value)}/>
                     </div>
                     
-                    <button type="text" className="btn btn-info">添加商品</button>
+                    <button type="text" className="btn btn-info" onClick={(e)=>this.save(e)}>添加商品</button>
             </div>
         )
     }

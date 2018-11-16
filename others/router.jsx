@@ -39,6 +39,9 @@ window.onpopstate=function(){
 
 //<Redirect to="" /> Redirect组件的必须属性是to属性，表示重定向的新地址。
 
+//  <Route path="/product/save/:pid?" component={SaveProduct} />   ?表示可匹配 /save  /save:pid
+
+
 
 class A extends React.Component{
     constructor(props){

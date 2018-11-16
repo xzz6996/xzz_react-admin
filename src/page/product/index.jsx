@@ -30,7 +30,7 @@ class Product extends React.Component{
             this.setState({
                 list:[]
             })
-            _util.errorTips(err)
+            _util.errorTips(err);
         })
     }
     //切换页数更新数据
@@ -86,8 +86,8 @@ class Product extends React.Component{
                             </button>
                         </td>
                         <td>
-                            <Link to="`/product/detail/{name.categotyId}`" className="clickButton">查看</Link>
-                            <Link to="`/product/save/{name.categotyId}`" className="clickButton">编辑</Link>
+                            <Link to={`/product/detail/${name.id}`} className="clickButton">查看</Link>
+                            <Link to={`/product/save/${name.id}`} className="clickButton">编辑</Link>
                         </td>
                     </tr>) });
         return (<div id="page-wrapper">
