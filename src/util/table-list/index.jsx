@@ -19,8 +19,7 @@ class TableList extends React.Component{
                 return (<th key={index} width={name.width}>{name.name}</th>)
             }else if(typeof name ==="string"){
                 return (<th key={index}>{name}</th>)
-            }
-            
+            }          
         })
         let listBody= this.props.children;
         let listError=(<tr>

@@ -23,3 +23,4 @@ ReactDOM.render(
 )
 
 
+//dangerouslySetInnerHTML属性的功能实际上就是显示纯文本内容

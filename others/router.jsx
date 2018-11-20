@@ -37,10 +37,13 @@ window.onpopstate=function(){
 
 // this.props.match 包含了具体的 url 信息，在 params 字段中可以获取到各个路由参数的值。
 
-//<Redirect to="" /> Redirect组件的必须属性是to属性，表示重定向的新地址。
 
-//  <Route path="/product/save/:pid?" component={SaveProduct} />   ?表示可匹配 /save  /save:pid
+//<Link to=""></link>
+//<Redirect to="" from=""/> Redirect组件的必须属性是to属性，表示重定向的新地址。
+//<Route path="/product/save/:pid?" component={SaveProduct} />   ?表示可匹配 /save  /save:pid
 
+
+ //跳转  this.props.history.push('index');
 
 
 class A extends React.Component{

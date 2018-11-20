@@ -1,0 +1,24 @@
+import React from 'react'
+import {Switch,Route,Redirect} from 'react-router-dom'
+//商品路由
+import Product from 'page/product/index/index.jsx'
+import SaveProduct from 'page/product/index/save.jsx'
+import DetailProduct from 'page/product/index/detail.jsx'
+import CategoryList from 'page/product/category/index.jsx'
+import CategoryAdd from 'page/product/category/add.jsx'
+class ProductRouter extends React.Component{
+     render(){
+         return (
+             <Switch>
+                 <Route path="/product/index" component={Product}/>
+                 <Route path="/product/save/:pid?" component={SaveProduct}/>
+                 <Route path="/product/detail/:pid?" component={DetailProduct}/>
+                 <Route path="/product-category/index/:categoryId?" component={CategoryList}/>
+                 <Route path="/product-category/add" component={CategoryAdd}/>
+                 <Redirect exact from="/product" to="/product/index"/>
+                 <Redirect exact from="/product-category" to="/product-category/index"/>
+             </Switch>
+         )
+     }   
+}
+export default ProductRouter;

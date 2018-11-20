@@ -39,7 +39,6 @@ class Detail extends React.Component{
                 })
                 res.defaultDetail=res.detail;
                 this.setState(res);    
-                console.log(this.state) 
             })
         }
     }
@@ -81,8 +80,8 @@ class Detail extends React.Component{
                         </div>                                                                      
                     </div>
                     <div className="form-group  change-group">
-                        <label>商品详情</label>
-                        {/* <RichEditor    detail={this.state.detail} defaultDetail={this.state.defaultDetail} /> */}
+                        <label className="col-md-12">商品详情</label>
+                        <div className="col-md-10" dangerouslySetInnerHTML={{__html: this.state.detail}}></div>
                     </div>
             </div>
         )

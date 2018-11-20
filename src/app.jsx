@@ -6,10 +6,9 @@ import Home from 'page/home/index.jsx'              // 首页
 import ErrorPage from 'page/error/index.jsx'        // 404页面
 import Login from 'page/login/index.jsx'            // 登录
 import UserList from 'page/user/index.jsx'          // 用户列表    
-//商品
-import Product from 'page/product/index.jsx'
-import SaveProduct from 'page/product/save.jsx'
-import DetailProduct from 'page/product/detail.jsx'
+import ProductRouter from 'page/product/router.jsx' //商品
+import OrderList from 'page/order/index.jsx'        //订单
+import OrderDetail from 'page/order/detail.jsx'     //订单详情
 
 class App extends React.Component{
     render(){
@@ -17,11 +16,12 @@ class App extends React.Component{
             <Layout>
                 <Switch>
                     <Route exact path="/" component={Home} /> 
-                    <Route  path="/product/index" component={Product} /> 
-                    <Route path="/product/save/:pid?" component={SaveProduct} /> 
-                    <Route path="/product/detail/:pid" component={DetailProduct}/>
-                    <Redirect exact from="/product" to="/product/index" />
+                    <Route  path="/product" component={ProductRouter} /> 
+                    <Route  path="/product-category" component={ProductRouter} /> 
+                    <Route paht="/order/index" component={OrderList}/>
+                    <Route path="/order/detail/:orderNo" component={OrderDetail}/>
                     <Route  path="/user/index" component={UserList} /> 
+                    <Redirect exact from="/order" to="/order/index"/>
                     <Redirect exact from="/user" to="/user/index"/>   
                     <Route  component={ErrorPage} />       
                 </Switch> 

@@ -34,6 +34,31 @@ class Product{
             data:{categoryId:categoryId||0}
         })
     }
+    //查看品类详情
+    getDeepCategory(categoryId){
+        return _util.request({
+            url:"/manage/category/get_deep_category.do",
+            type:"post",
+            data:{categoryId:categoryId||0}
+        })
+    }
+    //添加品类
+    addCategory(info){
+        return _util.request({
+            url:"/manage/category/add_category.do",
+            type:"post",
+            data:info
+        })
+    }
+    //修改品类名字
+    setCategory(info){
+        return _util.request({
+            url:"/manage/category/set_category_name.do",
+            type:"post",
+            data:info
+        })
+    }
+    
 
     //添加商品
     save(info){
