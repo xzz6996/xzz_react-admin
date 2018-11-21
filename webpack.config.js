@@ -2,11 +2,15 @@ const path=require('path');
 const webpack=require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+let WEBPACK_ENV=process.env.WEBPACK_ENV||'dev';
+
 module.exports={
     entry:"./src/app.jsx",
     output:{
         path:path.resolve(__dirname,'dist'),
         publicPath:"/dist/",
+        //publicPath:WEBPACK_ENV==='dev'?"/dist/":"域名/dist/"
         filename:'js/app.js'
     },
     resolve:{

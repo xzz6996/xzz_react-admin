@@ -23,13 +23,14 @@ npm i webpack-dev-server
 
 命令
 node_modules/.bin/webpack 
-node_modules/.bin/webpack-dev-server(低版本)
+node_modules/.bin/webpack-dev-server(低版本16以下)
 
 
 
-index.html直接饮用的cdn
+index.html直接引用的cdn
 https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css
 https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css(可以 npm remove font-awesome)
+https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 
 
 
